@@ -21,3 +21,75 @@ function launchModal() {
 }
 
 
+////////////////////////////////////////// PROJET 4
+///////// 1. CLOSE MODAL
+const modalClose = document.getElementsByClassName("close")[0];
+modalClose.addEventListener("click", closeModal);
+
+function closeModal() {
+  modalbg.style.display = "none";
+}
+
+
+
+///////// 2. IMPLEMENTER ENTREES DU FORMULAIRE
+///// A. LIER LABELS AUX ENTREES DANS LE HMTL EN UTILISANT "FOR" & "ID" DANS LE CODE EXISTANT. CORRIGER SI NECESSAIRE
+
+///// B. PAS DE JQUERY / PUR JAVASCRIPT
+// LE FORMULAIRE DOIT ÊTRE VALIDE QUAND L'UTILISATEUR CLIQUE SUR "Submit"
+// LES DONNEES SUIVANTES DOIVENT ÊTRE SAISIES CORRECTEMENT
+
+// LE CHAMP PRéNOM A UN MINIMUM DE 2 CARACTèRES / N'EST PAS VIDE
+const firstName = document.getElementById('first');
+const firstNameValidation = document.getElementsByClassName('validation')[0];
+
+firstName.addEventListener('change', function(firstNameChanged) {
+  if (firstName.value.length < 2) {
+    firstNameValidation.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+    firstNameValidation.style.color = 'red';
+  } else {
+    firstNameValidation.innerHTML = "Ce prénom est valide!"
+    firstNameValidation.style.color = 'green';
+  }
+});
+
+
+// LE CHAMP DU NOM DE FAMILLE A UN MINIMUM DE 2 CARACTèRES / N'EST PAS VIDE
+const lastName = document.getElementById('last');
+const lastNameValidation = document.getElementsByClassName('validation')[1];
+
+lastName.addEventListener('change', function(lastNameChanged) {
+  if (lastName.value.length < 2) {
+    lastNameValidation.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+    lastNameValidation.style.color = 'red';
+  } else {
+    lastNameValidation.innerHTML = "Ce nom est valide!"
+    lastNameValidation.style.color = 'green';
+  }
+});
+
+
+// L'ADRESSE ELECTRONIQUE EST VALIDE
+const mailAdress = document.getElementById('email');
+const mailValidation = document.getElementsByClassName('validation')[2];
+
+mailAdress.addEventListener('change', function(mailAdressChanged) {
+  const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  if (mailAdress.value.match(mailFormat)) {
+    mailValidation.innerHTML = "Cette adresse email est valide!";
+    mailValidation.style.color = 'green';
+  } else {
+    mailValidation.innerHTML = "Cette adresse email est invalide!";
+    mailValidation.style.color = 'red';
+  }
+});
+
+
+// POUR LE NOMBRE DE CONCOURS, UNE VALEUR NUMÉRIQUE
+
+// UN BOUTON RADIO EST SÉLECTIONNÉ
+
+// LA CASE DES CONDITIONS GÉNÉRALES EST COCHÉE, L'AUTRE CASE EST FACULTATIVE / PEUT ÊTRE LAISSÉE DÉCOCHÉE.
+
+// CONSERVER LES DONNÉES DU FORMULAIRE (NE PAS EFFACER LE FORMULAIRE) LORSQU'IL NE PASSE PAS LA VALIDATION
