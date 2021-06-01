@@ -31,94 +31,70 @@ function closeModal() {
 }
 
 ///////// 2. IMPLEMENTER ENTREES DU FORMULAIRE
-///// A. LIER LABELS AUX ENTREES DANS LE HMTL EN UTILISANT "FOR" & "ID" DANS LE CODE EXISTANT. CORRIGER SI NECESSAIRE
-/// ---> DONE
 
 
-///// B. PAS DE JQUERY / PUR JAVASCRIPT
-// LE FORMULAIRE DOIT ÊTRE VALIDE QUAND L'UTILISATEUR CLIQUE SUR "Submit"
+const submitModal = document.forms[0];
 
-
-
-// LES DONNEES SUIVANTES DOIVENT ÊTRE SAISIES CORRECTEMENT
-
-// LE CHAMP PRéNOM A UN MINIMUM DE 2 CARACTèRES / N'EST PAS VIDE
 const firstName = document.getElementById('first');
-const firstNameValidation = document.getElementsByClassName('validation')[0];
-
-firstName.addEventListener('change', function(firstNameChanged) {
-  if (firstName.value.length < 2) {
-    firstNameValidation.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
-    firstNameValidation.style.color = 'red';
-  } else {
-    firstNameValidation.innerHTML = "Ce prénom est valide!"
-    firstNameValidation.style.color = 'green';
-  }
-});
-
-
-// LE CHAMP DU NOM DE FAMILLE A UN MINIMUM DE 2 CARACTèRES / N'EST PAS VIDE
 const lastName = document.getElementById('last');
-const lastNameValidation = document.getElementsByClassName('validation')[1];
-
-lastName.addEventListener('change', function(lastNameChanged) {
-  if (lastName.value.length < 2) {
-    lastNameValidation.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-    lastNameValidation.style.color = 'red';
-  } else {
-    lastNameValidation.innerHTML = "Ce nom est valide!"
-    lastNameValidation.style.color = 'green';
-  }
-});
-
-
-// L'ADRESSE ELECTRONIQUE EST VALIDE
 const mailAdress = document.getElementById('email');
-const mailValidation = document.getElementsByClassName('validation')[2];
-
-mailAdress.addEventListener('change', function(mailAdressChanged) {
-  const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-  if (mailAdress.value.match(mailFormat)) {
-    mailValidation.innerHTML = "Cette adresse email est valide!";
-    mailValidation.style.color = 'green';
-  } else {
-    mailValidation.innerHTML = "Cette adresse email est invalide!";
-    mailValidation.style.color = 'red';
-  }
-});
-
-
-// POUR LE NOMBRE DE CONCOURS, UNE VALEUR NUMÉRIQUE
-
-// UN BOUTON RADIO EST SÉLECTIONNÉ
-const radioLocation = document.querySelector('input[type="radio"]');
-const locationValidation = document.getElementsByClassName('validation')[3];
-
-radioLocation.addEventListener('click', function(locationSelected) {
-  if (radioLocation.checked = true) {
-    locationValidation.innerHTML = "Vous avez sélectionné un lieu!";
-    locationValidation.style.color = "green";
-  }
-});
-
-// LA CASE DES CONDITIONS GÉNÉRALES EST COCHÉE, L'AUTRE CASE EST FACULTATIVE / PEUT ÊTRE LAISSÉE DÉCOCHÉE.
+const tourneys = document.getElementById('quantity');
+const radioLocations = document.querySelectorAll('input[type="radio"]');
 const conditions = document.getElementById('checkbox1');
+
+const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+let result = tourneys.value;
+
+const firstNameValidation = document.getElementsByClassName('validation')[0];
+const lastNameValidation = document.getElementsByClassName('validation')[1];
+const mailValidation = document.getElementsByClassName('validation')[2];
+const locationValidation = document.getElementsByClassName('validation')[3];
 const conditionsValidation = document.getElementsByClassName('validation')[4];
 
-conditions.addEventListener('click', function(conditionsUnchecked) {
-  if (conditions.checked = false) {
-    conditionsValidation.innerHTML = "Vous devez accepté les conditions d'utilisation";
-    conditionsValidation.style.color = "red";
+const newElt = document.createElement('span');
+let elt = document.getElementsByClassName('formData');
+
+submitModal.addEventListener('submit', function(e) {
+  let isLocationChecked;
+  for (radioLocation of radioLocations) {
+    if (radioLocation.checked) {
+      isLocationChecked = 1;
+      break;
+    }
+  };
+
+ 
+
+  if (firstName.value.length < 2) {
+    e.preventDefault();
+    elt[0].appendChild(newElt);
+    document.querySelector('div.formData > span').innerHTML = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
+    document.querySelector('div.formData > span').classList.add("error");
+  } else if (lastName.value.length < 2) {
+    e.preventDefault();
+    elt[1].appendChild(newElt);
+    document.querySelector('div.formData > span').innerHTML = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+    document.querySelector('div.formData > span').classList.add("error");
+   } else if (!(mailAdress.value.match(mailFormat))) {
+    e.preventDefault();
+    elt[2].appendChild(newElt);
+    document.querySelector('div.formData > span').innerHTML = 'Cette adresse email est invalide!';
+    document.querySelector('div.formData > span').classList.add("error");
+  } else if ((tourneys.value.length < 1) || (tourneys.value == NaN)) {
+    e.preventDefault();
+    elt[4].appendChild(newElt);
+    document.querySelector('div.formData > span').innerHTML = 'Vous devez insérez une valeur numérique.';
+    document.querySelector('div.formData > span').classList.add("error");
+  } else if (isLocationChecked !== 1) {
+    e.preventDefault();
+    elt[5].appendChild(newElt);
+    document.querySelector('div.formData > span').innerHTML = 'Vous devez sélectionner une ville.';
+    document.querySelector('div.formData > span').classList.add("error");
+    document.querySelector('div.formData > span').style.display = 'block';
+  } else if (!(conditions.checked)) {
+    e.preventDefault();
+    elt[6].appendChild(newElt);
+    document.querySelector('div.formData > span').innerHTML = "Vous devez accepter les conditions d'utilisation.";
+    document.querySelector('div.formData > span').classList.add("error");
   }
 });
-
-// CONSERVER LES DONNÉES DU FORMULAIRE (NE PAS EFFACER LE FORMULAIRE) LORSQU'IL NE PASSE PAS LA VALIDATION
-const submitButton = document.querySelector('input[type="submit"]');
-
- submitButton.addEventListener('submit', function(e) {
-   if (conditions.checked === false) {
-     conditionsValidation.innerHTML = "Vous devez accepté les conditions d'utilisation.";
-     e.preventDefault();
-   }
- });
