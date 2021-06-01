@@ -30,13 +30,16 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-
-
 ///////// 2. IMPLEMENTER ENTREES DU FORMULAIRE
 ///// A. LIER LABELS AUX ENTREES DANS LE HMTL EN UTILISANT "FOR" & "ID" DANS LE CODE EXISTANT. CORRIGER SI NECESSAIRE
+/// ---> DONE
+
 
 ///// B. PAS DE JQUERY / PUR JAVASCRIPT
 // LE FORMULAIRE DOIT ÊTRE VALIDE QUAND L'UTILISATEUR CLIQUE SUR "Submit"
+
+
+
 // LES DONNEES SUIVANTES DOIVENT ÊTRE SAISIES CORRECTEMENT
 
 // LE CHAMP PRéNOM A UN MINIMUM DE 2 CARACTèRES / N'EST PAS VIDE
@@ -89,7 +92,33 @@ mailAdress.addEventListener('change', function(mailAdressChanged) {
 // POUR LE NOMBRE DE CONCOURS, UNE VALEUR NUMÉRIQUE
 
 // UN BOUTON RADIO EST SÉLECTIONNÉ
+const radioLocation = document.querySelector('input[type="radio"]');
+const locationValidation = document.getElementsByClassName('validation')[3];
+
+radioLocation.addEventListener('click', function(locationSelected) {
+  if (radioLocation.checked = true) {
+    locationValidation.innerHTML = "Vous avez sélectionné un lieu!";
+    locationValidation.style.color = "green";
+  }
+});
 
 // LA CASE DES CONDITIONS GÉNÉRALES EST COCHÉE, L'AUTRE CASE EST FACULTATIVE / PEUT ÊTRE LAISSÉE DÉCOCHÉE.
+const conditions = document.getElementById('checkbox1');
+const conditionsValidation = document.getElementsByClassName('validation')[4];
+
+conditions.addEventListener('click', function(conditionsUnchecked) {
+  if (conditions.checked = false) {
+    conditionsValidation.innerHTML = "Vous devez accepté les conditions d'utilisation";
+    conditionsValidation.style.color = "red";
+  }
+});
 
 // CONSERVER LES DONNÉES DU FORMULAIRE (NE PAS EFFACER LE FORMULAIRE) LORSQU'IL NE PASSE PAS LA VALIDATION
+const submitButton = document.querySelector('input[type="submit"]');
+
+ submitButton.addEventListener('submit', function(e) {
+   if (conditions.checked === false) {
+     conditionsValidation.innerHTML = "Vous devez accepté les conditions d'utilisation.";
+     e.preventDefault();
+   }
+ });
