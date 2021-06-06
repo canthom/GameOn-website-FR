@@ -105,7 +105,5 @@ submitModal.addEventListener('submit', function(e) {
     elt[6].appendChild(newElt);
     document.querySelector('div.formData > span').innerHTML = "Vous devez accepter les conditions d'utilisation.";
     document.querySelector('div.formData > span').classList.add("error");
-  } else {
-    validBox.style.display = "block";
   }
 });
