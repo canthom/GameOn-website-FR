@@ -38,12 +38,15 @@ const submitModal = document.forms[0];
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const mailAdress = document.getElementById('email');
+const birthDate = document.getElementById('birthdate');
 const tourneys = document.getElementById('quantity');
 const radioLocations = document.querySelectorAll('input[type="radio"]');
 const conditions = document.getElementById('checkbox1');
 
 const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 let result = tourneys.value;
+
+const today = new Date(); 
 
 const firstNameValidation = document.getElementsByClassName('validation')[0];
 const lastNameValidation = document.getElementsByClassName('validation')[1];
@@ -54,6 +57,7 @@ const conditionsValidation = document.getElementsByClassName('validation')[4];
 const newElt = document.createElement('span');
 let elt = document.getElementsByClassName('formData');
 
+
 submitModal.addEventListener('submit', function(e) {
   let isLocationChecked;
   for (radioLocation of radioLocations) {
@@ -63,8 +67,8 @@ submitModal.addEventListener('submit', function(e) {
     }
   };
 
+  const birth = new Date(birthDate.value);
  
-
   if (firstName.value.length < 2) {
     e.preventDefault();
     elt[0].appendChild(newElt);
@@ -79,6 +83,11 @@ submitModal.addEventListener('submit', function(e) {
     e.preventDefault();
     elt[2].appendChild(newElt);
     document.querySelector('div.formData > span').innerHTML = 'Cette adresse email est invalide!';
+    document.querySelector('div.formData > span').classList.add("error");
+  } else if ((birth > today) || (birthDate.value === "")) {
+    e.preventDefault();
+    elt[3].appendChild(newElt);
+    document.querySelector('div.formData > span').innerHTML = 'Vous devez entrer une date de naissance valide.';
     document.querySelector('div.formData > span').classList.add("error");
   } else if ((tourneys.value.length < 1) || (tourneys.value == NaN)) {
     e.preventDefault();
@@ -96,5 +105,7 @@ submitModal.addEventListener('submit', function(e) {
     elt[6].appendChild(newElt);
     document.querySelector('div.formData > span').innerHTML = "Vous devez accepter les conditions d'utilisation.";
     document.querySelector('div.formData > span').classList.add("error");
+  } else {
+    validBox.style.display = "block";
   }
 });
