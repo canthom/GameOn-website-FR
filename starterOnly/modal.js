@@ -31,10 +31,7 @@ function closeModal() {
 }
 
 ///////// 2. IMPLEMENTER ENTREES DU FORMULAIRE
-
-
 const submitModal = document.forms[0];
-
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const mailAdress = document.getElementById('email');
@@ -44,15 +41,8 @@ const radioLocations = document.querySelectorAll('input[type="radio"]');
 const conditions = document.getElementById('checkbox1');
 
 const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-let result = tourneys.value;
 
 const today = new Date(); 
-
-const firstNameValidation = document.getElementsByClassName('validation')[0];
-const lastNameValidation = document.getElementsByClassName('validation')[1];
-const mailValidation = document.getElementsByClassName('validation')[2];
-const locationValidation = document.getElementsByClassName('validation')[3];
-const conditionsValidation = document.getElementsByClassName('validation')[4];
 
 const newElt = document.createElement('span');
 let elt = document.getElementsByClassName('formData');
@@ -105,7 +95,5 @@ submitModal.addEventListener('submit', function(e) {
     elt[6].insertBefore(newElt, document.getElementById('checkbox2'));
     document.querySelector('div.formData > span').innerHTML = "Vous devez accepter les conditions d'utilisation.";
     document.querySelector('div.formData > span').classList.add("error");
-  } else {
-    document.querySelector('#myTopnav').style.display = "none";
   }
 });
