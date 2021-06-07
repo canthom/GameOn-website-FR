@@ -40,9 +40,9 @@ const tourneys = document.getElementById('quantity');
 const radioLocations = document.querySelectorAll('input[type="radio"]');
 const conditions = document.getElementById('checkbox1');
 
-const mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const today = new Date(); 
+
+
 
 const newElt = document.createElement('span');
 let elt = document.getElementsByClassName('formData');
@@ -57,7 +57,12 @@ submitModal.addEventListener('submit', function(e) {
     }
   };
 
+  // REGULAR EXPRESSION
+  const mailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+  // DATES
   const birth = new Date(birthDate.value);
+  const today = new Date(); 
  
   if (firstName.value.length < 2) {
     e.preventDefault();
