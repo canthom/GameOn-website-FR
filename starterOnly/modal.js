@@ -41,6 +41,10 @@ const tourneys = document.getElementById('quantity');
 const radioLocations = document.querySelectorAll('input[type="radio"]');
 const conditions = document.getElementById('checkbox1');
 
+// ERROR MESSAGE
+const newElt = document.createElement('span');
+let elt = document.getElementsByClassName('formData');
+
 // SOUMETTRE LE FORMULAIRE
 submitModal.addEventListener('submit', function(e) {
   let isLocationChecked;
@@ -57,10 +61,6 @@ submitModal.addEventListener('submit', function(e) {
   // DATES
   const birth = new Date(birthDate.value);
   const today = new Date(); 
-
-  // ERROR MESSAGE
-  const newElt = document.createElement('span');
-  let elt = document.getElementsByClassName('formData');
  
   if (firstName.value.length < 2) {
     e.preventDefault();
