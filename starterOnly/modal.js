@@ -102,8 +102,10 @@ submitModal.addEventListener('submit', function(e) {
     document.querySelector('div.formData > span').style.display = 'block';
   } else if (!(conditions.checked)) {
     e.preventDefault();
-    elt[6].appendChild(newElt);
+    elt[6].insertBefore(newElt, document.getElementById('checkbox2'));
     document.querySelector('div.formData > span').innerHTML = "Vous devez accepter les conditions d'utilisation.";
     document.querySelector('div.formData > span').classList.add("error");
+  } else {
+    document.querySelector('#myTopnav').style.display = "none";
   }
 });
