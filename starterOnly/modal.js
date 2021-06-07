@@ -67,6 +67,7 @@ submitModal.addEventListener('submit', function(e) {
     elt[0].appendChild(newElt);
     document.querySelector('div.formData > span').innerHTML = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
     document.querySelector('div.formData > span').classList.add("error");
+    firstName.style.border = "red";
   } else if (lastName.value.length < 2) {
     e.preventDefault();
     elt[1].appendChild(newElt);
@@ -98,5 +99,22 @@ submitModal.addEventListener('submit', function(e) {
     elt[6].insertBefore(newElt, document.getElementById('checkbox2'));
     document.querySelector('div.formData > span').innerHTML = "Vous devez accepter les conditions d'utilisation.";
     document.querySelector('div.formData > span').classList.add("error");
+  } else {
+    e.preventDefault();
+    document.querySelector('.modal-body > form').style.display = "none";
+
+    // MESSAGE
+    document.querySelector('.modal-body').appendChild(newElt);
+    document.querySelector('.modal-body > span').innerHTML = "Merci ! Votre réservation a été reçue.";
+
+    // CLOSE BUTTON
+    const btn = document.createElement("button");
+    document.querySelector('.modal-body').appendChild(btn);
+    document.querySelector('.modal-body button').innerHTML = "Fermer";
+    document.querySelector('.modal-body button').classList.add("btn-signup");
+    
+    document.querySelector('.modal-body button').addEventListener('click', function () {
+      closeModal();
+    });
   }
 });
