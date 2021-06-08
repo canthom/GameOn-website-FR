@@ -101,17 +101,28 @@ submitModal.addEventListener('submit', function(e) {
     document.querySelector('div.formData > span').classList.add("error");
   } else {
     e.preventDefault();
-    document.querySelector('.modal-body > form').style.display = "none";
 
-    // MESSAGE
+    // CONFIRMATION WINDOW
+    document.querySelector('.modal-body > form').style.display = "none";
+    document.querySelector('.modal-body').style.height = "auto";
+    document.querySelector('.modal-body').style.display = "flex";
+    document.querySelector('.modal-body').style.flexDirection = "column";
+    document.querySelector('.modal-body').style.justifyContent = "center";
+    document.querySelector('.modal-body').style.alignItems = "center";
+
+    // CONFIRMATION MESSAGE
     document.querySelector('.modal-body').appendChild(newElt);
     document.querySelector('.modal-body > span').innerHTML = "Merci ! Votre réservation a été reçue.";
+    document.querySelector('.modal-body > span').style.color = "white";
+    document.querySelector('.modal-body > span').style.fontSize = "36px";
+
 
     // CLOSE BUTTON
     const btn = document.createElement("button");
     document.querySelector('.modal-body').appendChild(btn);
     document.querySelector('.modal-body button').innerHTML = "Fermer";
     document.querySelector('.modal-body button').classList.add("btn-signup");
+
     
     document.querySelector('.modal-body button').addEventListener('click', function () {
       closeModal();
