@@ -28,6 +28,7 @@ modalClose.addEventListener("click", closeModal);
 
 function closeModal() {
   modalbg.style.display = "none";
+  document.forms[0].reset();
 }
 
 ///////// 2. IMPLEMENTER ENTREES DU FORMULAIRE
@@ -47,7 +48,6 @@ submitModal.addEventListener('submit', function(e) {
   if (firstName.value.length < 2) {
     formData[0].dataset.error = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
     formData[0].dataset.errorVisible = 'true';
-    
   } else {
     formData[0].removeAttribute('data-error');
     formData[0].removeAttribute('data-error-visible');
@@ -57,7 +57,6 @@ submitModal.addEventListener('submit', function(e) {
   if (lastName.value.length < 2) {
     formData[1].dataset.error = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
     formData[1].dataset.errorVisible = 'true';
-    
   } else {
     formData[1].removeAttribute('data-error');
     formData[1].removeAttribute('data-error-visible');
@@ -69,7 +68,6 @@ submitModal.addEventListener('submit', function(e) {
   if (!mailFormat.test(mailAdress.value)) {
     formData[2].dataset.error = 'Veuillez entrer une adresse email valide.';
     formData[2].dataset.errorVisible = 'true';
-    
   } else {
     formData[2].removeAttribute('data-error');
     formData[2].removeAttribute('data-error-visible');
@@ -80,20 +78,18 @@ submitModal.addEventListener('submit', function(e) {
   const today = new Date();
 
   if  ((isNaN(Date.parse(birthDate.value))) || (birth > today)) {
-    formData[3].dataset.error = 'Veuillez entrer une date de naissance valide au format aaaa-mm-jj';
+    formData[3].dataset.error = 'Veuillez entrer une date valide au format aaaa-mm-jj';
     formData[3].dataset.errorVisible = 'true';
-    
   } else {
     formData[3].removeAttribute('data-error');
     formData[3].removeAttribute('data-error-visible');
   }
 
   // Vérification du nombre de tournois
-  tourneyFormat = /^[0-9]$/
-  if ((tourneys.value.length < 1) || (!tourneyFormat.test(tourneys.value))) {
+  tourneyFormat = /^[0-9]{1,100}$/;
+  if (!tourneyFormat.test(tourneys.value)) {
     formData[4].dataset.error = 'Vous devez insérez une valeur numérique.';
     formData[4].dataset.errorVisible = 'true';
-    
   } else {
     formData[4].removeAttribute('data-error');
     formData[4].removeAttribute('data-error-visible');
@@ -109,9 +105,8 @@ submitModal.addEventListener('submit', function(e) {
   };
 
   if (isLocationChecked !== 1) {
-    formData[5].dataset.error = 'Vous devez insérez une valeur numérique.';
+    formData[5].dataset.error = 'Vous devez sélectionner une ville.';
     formData[5].dataset.errorVisible = 'true';
-    
   } else {
     formData[5].removeAttribute('data-error');
     formData[5].removeAttribute('data-error-visible');
@@ -121,12 +116,10 @@ submitModal.addEventListener('submit', function(e) {
   if (!(conditions.checked)) {
     formData[6].dataset.error = "Vous devez accepter les conditions d'utilisation.";
     formData[6].dataset.errorVisible = 'true';
-    
   } else {
     formData[6].removeAttribute('data-error');
     formData[6].removeAttribute('data-error-visible');
   }
-
 
   // Comportement du formulaire
   let hasError;
@@ -142,13 +135,12 @@ submitModal.addEventListener('submit', function(e) {
   } else {
     e.preventDefault();
     closeModal();
-    document.forms[0].reset();
 
   // Validation Box
     const div = document.createElement('div');
     document.querySelector('body').appendChild(div);
     document.querySelector('body > div:last-child').classList.add('content', 'validBox');
-    document.querySelector('.validBox').style.width = '500px';
+    document.querySelector('.validBox').style.width = '400px';
     document.querySelector('.validBox').style.height = '600px';
     document.querySelector('.validBox').style.position = 'absolute';
     document.querySelector('.validBox').style.top = '50%';
@@ -156,7 +148,7 @@ submitModal.addEventListener('submit', function(e) {
     document.querySelector('.validBox').style.transform = 'translate(-50%, -50%)';
     document.querySelector('.validBox').style.zIndex = '100';
     document.querySelector('.validBox').style.display = 'block';
-    document.querySelector('.validBox').style.boxShadow = '0 10px 20px black';
+    document.querySelector('.validBox').style.boxShadow = '0 5px 10px rgba(0, 0, 0, 0.5)';
 
   // Validation Box Span Close
     document.querySelector('.validBox').appendChild(document.createElement('span'));
