@@ -44,6 +44,9 @@ const conditions = document.getElementById('checkbox1');
 
 // EVENT : SOUMETTRE LE FORMULAIRE
 submitModal.addEventListener('submit', function(e) {
+  // Bloquer le fonctionnement habituel du formulaire
+  e.preventDefault();
+
   // Vérification du prénom
   if (firstName.value.length < 2) {
     formData[0].dataset.error = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
@@ -130,13 +133,10 @@ submitModal.addEventListener('submit', function(e) {
     }
   }
 
-  if (hasError === 1) {
-    e.preventDefault();
-  } else {
-    e.preventDefault();
+  if (!(hasError === 1)) {
     closeModal();
 
-  // Validation Box
+    // Validation Box
     const div = document.createElement('div');
     document.querySelector('body').appendChild(div);
     document.querySelector('body > div:last-child').classList.add('content', 'validBox');
@@ -150,14 +150,14 @@ submitModal.addEventListener('submit', function(e) {
     document.querySelector('.validBox').style.display = 'block';
     document.querySelector('.validBox').style.boxShadow = '0 5px 10px rgba(0, 0, 0, 0.5)';
 
-  // Validation Box Span Close
+    // Validation Box Span Close
     document.querySelector('.validBox').appendChild(document.createElement('span'));
     document.querySelector('.validBox > span').classList.add('close');
     document.querySelector('.validBox > span').addEventListener('click', function() {
       document.querySelector('body').removeChild(div);
     });
 
-  // Validation Box Content
+    // Validation Box Content
     document.querySelector('.validBox').appendChild(document.createElement('div'));
     document.querySelector('.validBox > div').classList.add('modal-body', 'validMessage');
     let newSpan = document.createElement('span');
@@ -174,7 +174,7 @@ submitModal.addEventListener('submit', function(e) {
     document.querySelector('.validMessage > span').style.textAlign = 'center';
 
 
-  //  CLOSE BUTTON
+    //  CLOSE BUTTON
     const btn = document.createElement("button");
     document.querySelector('.validBox').appendChild(btn);
     document.querySelector('.validBox > button').innerHTML = "Fermer";
@@ -183,5 +183,5 @@ submitModal.addEventListener('submit', function(e) {
     document.querySelector('.validBox > button').addEventListener('click', function() {
       document.querySelector('body').removeChild(div);
     });
-  }
+  } 
 });
