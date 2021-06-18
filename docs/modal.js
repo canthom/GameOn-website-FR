@@ -66,7 +66,7 @@ submitModal.addEventListener('submit', function(e) {
   }
 
   // Vérification de l'adresse mail
-  mailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+  mailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,63})$/;
 
   if (!mailFormat.test(mailAdress.value)) {
     formData[2].dataset.error = 'Veuillez entrer une adresse email valide.';

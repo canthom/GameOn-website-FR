@@ -472,9 +472,9 @@ footer {
     float: right;
     display: block;
     color: #ff0000;
+    background-color: #fff;
   }
 
-  /* Test */
   .topnav.responsive {
     position: relative;
     flex-direction: column;
@@ -492,7 +492,6 @@ footer {
     float: none;
     width: 100%;
   }
-  /* Test */
 
   .topnav.responsive .icon {
     position: absolute;
@@ -500,6 +499,8 @@ footer {
     top: 27px;
     margin: 0;
     color: white;
+    background-color: #ff0000;
+    border-radius: 15px;
   }
   .topnav.responsive a {
     float: none;
